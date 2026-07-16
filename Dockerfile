@@ -33,5 +33,5 @@ EXPOSE 7860
 # Next.js will default to port 3000, we force it to 7860
 ENV PORT=7860
 
-# Run the application
-CMD ["pnpm", "start", "--", "-p", "7860"]
+# Next.js will automatically use the PORT environment variable we set above
+CMD ["pnpm", "start"]
