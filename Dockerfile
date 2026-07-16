@@ -17,14 +17,15 @@ WORKDIR /app
 RUN pip3 install pandas numpy catboost scikit-learn
 
 # Copy package.json and install Node dependencies
-COPY package*.json ./
-RUN npm install
+COPY package*.json pnpm-lock.yaml ./
+RUN npm install -g pnpm
+RUN pnpm install
 
 # Copy the rest of the application
 COPY . .
 
 # Build the Next.js application
-RUN npm run build
+RUN pnpm run build
 
 # Expose port 7860 (Required by Hugging Face Spaces, also works for Render)
 EXPOSE 7860
@@ -33,4 +34,4 @@ EXPOSE 7860
 ENV PORT=7860
 
 # Run the application
-CMD ["npm", "start", "--", "-p", "7860"]
+CMD ["pnpm", "start", "--", "-p", "7860"]
